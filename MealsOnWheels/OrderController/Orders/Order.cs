@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace MealsOnWheels.OrderController.Orders
-{
+namespace MealsOnWheels;
+
     public class Order //det som behövs för state i order /sofia
     {
         private IOrderState currentState = new ReceivedState(); //referens till state
@@ -29,4 +29,4 @@ namespace MealsOnWheels.OrderController.Orders
         }
 
     }
-}
+
