@@ -4,7 +4,12 @@ using System.Text;
 
 namespace MealsOnWheels.OrderController.Orders.States
 {
-    internal class CancelledState
+    public class CancelledState : IOrderState
     {
+        public void Next(Order order) => Console.WriteLine("Ordern är avbruten.");
+
+        public void Cancel(Order order) => Console.WriteLine("Ordern är redan avbruten.");
+
+        public string GetStatusName() => "Avbruten";
     }
 }
