@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Text;
 namespace MealsOnWheels;
 
-internal class IOrderState
-    {
-    }
+public interface IOrderState
+{
+    void Next(Order order);
+    void Cancel(Order order);
+    string GetStatusName();
+}
