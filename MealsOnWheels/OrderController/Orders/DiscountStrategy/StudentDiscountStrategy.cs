@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+namespace MealsOnWheels;
 
-namespace MealsOnWheels.OrderController.Orders.DiscountStrategy
+public class StudentDiscountStrategy : IDiscountStrategy
 {
-    internal class StudentDiscountStrategy : IDiscountStrategy
+    public decimal Apply(decimal price)
     {
-        public decimal Apply(decimal price)
-        {
-            return price * 0.9m;
-        }
+        return price * 0.9m;
     }
 }

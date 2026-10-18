@@ -3,6 +3,6 @@ using System.Collections.Generic;
 using System.Text;
 namespace MealsOnWheels;
 
-public class Restaurant
-    {
-    }
+public class Restaurant : IOrderObserver
+{
+}
