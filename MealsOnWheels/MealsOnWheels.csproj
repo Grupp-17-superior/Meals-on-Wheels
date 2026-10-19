@@ -7,10 +7,4 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Compile Remove="OrderController\DeliveryService\**" />
-    <EmbeddedResource Remove="OrderController\DeliveryService\**" />
-    <None Remove="OrderController\DeliveryService\**" />
-  </ItemGroup>
-
 </Project>

@@ -1,4 +1,4 @@
-﻿using MealsOnWheels;
+﻿namespace MealsOnWheels;
 
 public class Restaurant : IOrderObserver
 {
@@ -10,12 +10,14 @@ public class Restaurant : IOrderObserver
 	// Restaurangens meny (lista på rätter/produkter)
 	public List<MenuItem> Menu { get; set; } = new List<MenuItem>();
 
-	// Lista på aktiva beställningar hos restaurangen
-	public List<Order> ActiveOrders { get; set; } = new List<Order>();
+    // Lista på aktiva beställningar hos restaurangen
+    //Behöver restaurangen hålla koll på alla aktiva ordrar? Eller ska det skötas av OrderService?
+    public List<Order> ActiveOrders { get; set; } = new List<Order>();
 
 	public Restaurant(int restaurantId, string name, string address, string phoneNumber)
 	{
-		RestaurantId = restaurantId;
+        //Behöver vi restaurantID?
+        RestaurantId = restaurantId;
 		Name = name;
 		Address = address;
 		PhoneNumber = phoneNumber;
@@ -42,5 +44,4 @@ public class Restaurant : IOrderObserver
 		// Exempel på logik baserat på orderns status:
 		// Om ordern är mottagen kan restaurangen t.ex. börja tillaga maten
 	}
-}
 }
