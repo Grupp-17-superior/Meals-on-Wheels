@@ -3,6 +3,11 @@ using System.Collections.Generic;
 using System.Text;
 namespace MealsOnWheels;
 
-internal class NoDiscount
+public class NoDiscount : IDiscountStrategy
+{
+    public decimal Apply(decimal price)
     {
+        return price;
     }
+}
+

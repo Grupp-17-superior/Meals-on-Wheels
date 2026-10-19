@@ -3,6 +3,6 @@ using System.Collections.Generic;
 using System.Text;
 namespace MealsOnWheels;
 
-internal class DeliveryDriver
-    {
-    }
+public class DeliveryDriver : IOrderObserver
+{
+}

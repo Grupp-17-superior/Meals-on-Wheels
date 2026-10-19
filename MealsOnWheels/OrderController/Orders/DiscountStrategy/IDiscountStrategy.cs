@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 namespace MealsOnWheels;
 
-internal class IDiscountStrategy
-    {
-    }
+public interface IDiscountStrategy
+{
+    public decimal Apply(decimal price);
+}
