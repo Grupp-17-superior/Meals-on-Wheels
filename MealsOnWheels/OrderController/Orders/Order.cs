@@ -6,6 +6,8 @@ namespace MealsOnWheels;
 public class Order //det som behövs för state i order /sofia
 {
     public int orderId;
+    private static int nextId = 0;
+
     public Restaurant restaurant;
     public Customer customer;
     public DeliveryDriver? deliveryDriver;
@@ -23,6 +25,7 @@ public class Order //det som behövs för state i order /sofia
         this.customer = customer;
         this.deliveryDriver = deliveryDriver;
         this.orderItems = orderItems;
+        orderId = nextId++;
 
         AddObserver(customer);
         AddObserver(restaurant);
