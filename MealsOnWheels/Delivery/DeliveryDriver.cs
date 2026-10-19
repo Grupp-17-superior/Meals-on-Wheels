@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-
 namespace MealsOnWheels;
 
 public class DeliveryDriver : IOrderObserver
@@ -22,24 +21,28 @@ public class DeliveryDriver : IOrderObserver
 		VehicleType = vehicleType;
 	}
 
-	// Tilldela en order till budet
-	public void AssignOrder(Order order)
-	{
-		if (!IsAvailable)
-		{
-			Console.WriteLine($"[Bud {Name}] Kan inte ta emot order #{order.orderId} eftersom budet upptaget.");
-			return;
-		}
 
-		CurrentOrder = order;
-		IsAvailable = false;
-		order.deliveryDriver = this;
-		order.AddObserver(this); // Registrera budet som observatör på ordern
+	//Bör skötas av DeliveryService
 
-		Console.WriteLine($"[Bud {Name}] Har tilldelats order #{order.orderId}. Levereras med {VehicleType}.");
-	}
+	//public void AssignOrder(Order order)
+	//{
+	//	if (!IsAvailable)
+	//	{
+	//		Console.WriteLine($"[Bud {Name}] Kan inte ta emot order #{order.orderId} eftersom budet upptaget.");
+	//		return;
+	//	}
+
+	//	CurrentOrder = order;
+	//	IsAvailable = false;
+	//	order.deliveryDriver = this;
+	//	order.AddObserver(this); // Registrera budet som observatör på ordern
+
+	//	Console.WriteLine($"[Bud {Name}] Har tilldelats order #{order.orderId}. Levereras med {VehicleType}.");
+	//}
 
 	// Slutför en leverans
+
+
 	public void CompleteDelivery()
 	{
 		if (CurrentOrder != null)

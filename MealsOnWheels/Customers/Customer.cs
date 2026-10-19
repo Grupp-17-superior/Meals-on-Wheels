@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-
 namespace MealsOnWheels;
 
 public class Customer : IOrderObserver
@@ -11,23 +10,19 @@ public class Customer : IOrderObserver
 	public string PhoneNumber { get; set; }
 	public string Email { get; set; }
 
-	// Historik över alla ordrar som kunden har lagt
-	public List<Order> OrderHistory { get; private set; } = new List<Order>();
+    // Historik över alla ordrar som kunden har lagt
+
+    //Behöver vi en historik över alla ordrar som kunden har lagt?
+    public List<Order> OrderHistory { get; private set; } = new List<Order>();
 
 	public Customer(int customerId, string name, string deliveryAddress, string phoneNumber, string email)
 	{
+		//Behöver vi customerID?
 		CustomerId = customerId;
 		Name = name;
 		DeliveryAddress = deliveryAddress;
 		PhoneNumber = phoneNumber;
 		Email = email;
-	}
-
-	// Lägger till en ny order i kundens historik
-	public void PlaceOrder(Order order)
-	{
-		OrderHistory.Add(order);
-		Console.WriteLine($"[Kund {Name}] Order #{order.orderId} har lagts!");
 	}
 
 	// Implementering av IOrderObserver
