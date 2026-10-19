@@ -31,6 +31,11 @@ public class Order //det som behövs för state i order /sofia
             AddObserver(deliveryDriver);
     }
 
+    public void GenerateId()
+    {
+
+    }
+
     public void SetState(IOrderState newState) //ändra state
     {
         currentState = newState;
