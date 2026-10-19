@@ -8,7 +8,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="OrderController\DeliveryService\" />
+    <Compile Remove="OrderController\DeliveryService\**" />
+    <EmbeddedResource Remove="OrderController\DeliveryService\**" />
+    <None Remove="OrderController\DeliveryService\**" />
   </ItemGroup>
 
 </Project>
