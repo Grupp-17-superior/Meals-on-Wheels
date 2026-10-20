@@ -14,7 +14,8 @@ public class OrderController
         _deliveryService = deliveryService;
     }
 
-    public Order CreateOrder(
+    //ordern kan nu returnera null ifall ordersumman är för låg/sofia
+    public Order? CreateOrder(
         Customer customer,
         Restaurant restaurant,
         List<OrderItems> orderItems)
@@ -23,6 +24,17 @@ public class OrderController
            orderItems == null || orderItems.Count == 0)
         {
             throw new ArgumentException("Ogiltig beställning.");
+        }
+
+        // Beräknar och kontrollerar beställningens totalsumma
+        decimal orderTotal = orderItems.Sum(
+            item => item.MenuItem.Price * item.Quantity);
+
+
+        if (!restaurant.MeetsMinimumOrder(orderTotal))
+        {
+            Console.WriteLine("Beställningen uppfyller inte restaurangens minimibeloppkrav.");
+            return null;
         }
 
         Order order = new Order (customer, restaurant, orderItems);

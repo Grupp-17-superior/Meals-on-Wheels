@@ -7,24 +7,36 @@ public class Restaurant : IOrderObserver
 	public string Address { get; set; }
 	public string PhoneNumber { get; set; }
 
-	// Restaurangens meny (lista på rätter/produkter)
-	public List<MenuItem> Menu { get; set; } = new List<MenuItem>();
+	//restaurangens egna regler 
+    public decimal MinimumOrderAmount { get; set; }
+    public int EstimatedDeliveryTime { get; set; }
+
+    // Restaurangens meny (lista på rätter/produkter)
+    public List<MenuItem> Menu { get; set; } = new List<MenuItem>();
 
     // Lista på aktiva beställningar hos restaurangen
     //Behöver restaurangen hålla koll på alla aktiva ordrar? Eller ska det skötas av OrderService?
     public List<Order> ActiveOrders { get; set; } = new List<Order>();
 
-	public Restaurant(int restaurantId, string name, string address, string phoneNumber)
+	public Restaurant(int restaurantId, string name, string address, string phoneNumber, decimal minimumOrderAmount, int estimatedDeliveryTime)
 	{
         //Behöver vi restaurantID?
         RestaurantId = restaurantId;
 		Name = name;
 		Address = address;
 		PhoneNumber = phoneNumber;
+        MinimumOrderAmount = minimumOrderAmount;
+        EstimatedDeliveryTime = estimatedDeliveryTime;
 	}
 
-	// Metod för att lägga till rätter i menyn
-	public void AddMenuItem(MenuItem item)
+	// kontroll för minsta order som just nu kontrolleras före rabatt
+    public bool MeetsMinimumOrder(decimal orderTotal)
+    {
+        return orderTotal >= MinimumOrderAmount;
+    }
+
+    // Metod för att lägga till rätter i menyn
+    public void AddMenuItem(MenuItem item)
 	{
 		Menu.Add(item);
 	}
