@@ -28,7 +28,7 @@ public class ConsoleMenu
             {
                 case '1':
                     {
-                        RestaurantMenu();
+                        RestaurantsMenu();
                         break;
                     }
                 case '2':
@@ -44,15 +44,45 @@ public class ConsoleMenu
         }
     }
 
-    public void RestaurantMenu() 
+    public void RestaurantsMenu() 
     {
-        var restaurants = _restaurantService.GetRestaurants();
-
-        Console.WriteLine("Välj en restaurang:");
-        for (int i = 0; i < restaurants.Count; i++) 
+        while (true)
         {
-            Console.WriteLine($"{i + 1}. {restaurants[i].Name}");
+            var restaurants = _restaurantService.GetRestaurants();
+            Console.WriteLine("Välj en restaurang:");
+            for (int i = 0; i < restaurants.Count; i++)
+            {
+                Console.WriteLine($"{i + 1}. {restaurants[i].Name}");
+            }
+            char choice = Console.ReadKey(true).KeyChar;
+            int index = choice - '1';
 
+            if (index >= 0 && index < restaurants.Count)
+            {
+                ShowMenu(restaurants[index]);
+                break;
+            }
+            else
+            {
+                Console.WriteLine("Oglitigt val");
+            }
         }
+    }
+
+    public void ShowMenu(Restaurant restaurant)
+    {
+        while (true)
+        {
+            Console.WriteLine("Välj en vara");
+            for (int i = 0; i < restaurant.Menu.Count; i++)
+            {
+                Console.WriteLine($"{i + 1} {restaurant.Menu[i].Name}");
+            }
+            char choice = Console.ReadKey(true).KeyChar;
+            List<OrderItems> items = new List<OrderItems>();
+            items.Add(choice );
+            break;
+        }
+
     }
 }
