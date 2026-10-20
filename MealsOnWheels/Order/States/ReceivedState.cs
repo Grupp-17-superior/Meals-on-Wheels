@@ -10,4 +10,4 @@ public class ReceivedState : IOrderState
     public void Cancel(Order order) => order.SetState(new CancelledState());
 
     public string GetStatusName() => "Mottagen";
-}
+}   
