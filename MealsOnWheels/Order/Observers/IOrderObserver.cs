@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 namespace MealsOnWheels;
 
-public class Customer : IOrderObserver
+public interface IOrderObserver
 {
+	void Update(Order order);
 }

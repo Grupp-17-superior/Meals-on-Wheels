@@ -1,9 +1,14 @@
-﻿namespace MealsOnWheels;
+﻿using System;
+using System.Collections.Generic;
 
-    public class Program
-    {
-        static void Main(string[] args)
-        {
+namespace MealsOnWheels;
 
-        }
+class Program
+{
+	static void Main(string[] args)
+	{
+		DeliveryService deliveryService = new DeliveryService();
+        OrderController orderController = new OrderController(deliveryService);
+		RestaurantService restaurantService = new RestaurantService();
     }
+}

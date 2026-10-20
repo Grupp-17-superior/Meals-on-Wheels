@@ -6,29 +6,28 @@ namespace MealsOnWheels;
 public class Order //det som behövs för state i order /sofia
 {
     public int orderId;
+    private static int nextId = 0;
+
     public Restaurant restaurant;
     public Customer customer;
     public DeliveryDriver? deliveryDriver;
 
-    private List<OrderItem> orderItems = new List<OrderItem>();
+    private List<OrderItems> orderItems = new List<OrderItems>();
     private List<IOrderObserver> observers = new List<IOrderObserver>();
 
     private IDiscountStrategy? discountStrategy;
     private IOrderState currentState = new ReceivedState(); //referens till state
     
 
-    public Order(Restaurant restaurant, Customer customer, List<OrderItem> orderItems, DeliveryDriver? deliveryDriver = null)
+    public Order(Customer customer, Restaurant restaurant, List<OrderItems> orderItems)
     {
         this.restaurant = restaurant;
         this.customer = customer;
-        this.deliveryDriver = deliveryDriver;
         this.orderItems = orderItems;
+        orderId = nextId++;
 
         AddObserver(customer);
         AddObserver(restaurant);
-
-        if (deliveryDriver != null)
-            AddObserver(deliveryDriver);
     }
 
     public void SetState(IOrderState newState) //ändra state
@@ -69,8 +68,16 @@ public class Order //det som behövs för state i order /sofia
         }
     }
 
-    public void CalculateTotalPrice()
+    public decimal CalculateTotalPrice()
     {
+        decimal total = 0;
+
+        foreach (var item in orderItems)
+        {
+            total += item.MenuItem.Price * item.Quantity;
+        }
+
+        return total;
     }
 }
 
