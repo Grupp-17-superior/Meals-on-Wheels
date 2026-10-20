@@ -4,16 +4,17 @@ namespace MealsOnWheels;
 
 public class Customer : IOrderObserver
 {
-	public int CustomerId { get; set; }
+    private static int nextCustomerId = 1; //skapar ett costumer id
+    public int CustomerId { get; } // tog bort set så att customer id inte kan ändras utifrån så vi slipper problem med att koppla order till customer.
 	public string Name { get; set; }
 	public string DeliveryAddress { get; set; }
 	public string PhoneNumber { get; set; }
 	public string Email { get; set; }
 
-	public Customer(int customerId, string name, string deliveryAddress, string phoneNumber, string email)
+	public Customer( string name, string deliveryAddress, string phoneNumber, string email)
 	{
-		CustomerId = customerId;
-		Name = name;
+        CustomerId = nextCustomerId++;
+        Name = name;
 		DeliveryAddress = deliveryAddress;
 		PhoneNumber = phoneNumber;
 		Email = email;
@@ -22,15 +23,29 @@ public class Customer : IOrderObserver
 	// Implementering av IOrderObserver
 	public void Update(Order order)
 	{
-		Console.WriteLine($"[Kund {Name}] Notifikation: Din order #{order.orderId} hos {order.restaurant.Name} har ändrat status till: '{order.GetState()}'");
+		string status = order.GetState();
 
-		// Exempel på anpassade meddelanden beroende på status
-		switch (order.GetState().ToLower())
+		// anpassade meddelanden beroende på status
+		switch (status)
 		{
-			case "delivered":
-				Console.WriteLine($"[Kund {Name}] Smaklig måltid! Din mat har levererats till {DeliveryAddress}.");
+			case "Mottagen":
+                Console.WriteLine($"[Kund {Name} Din order #{order.orderId} " +
+            $"hos {order.restaurant.Name} har tagits emot");
 				break;
-			case "cancelled":
+
+            case "Förbereder":
+				Console.WriteLine(
+					$"[Kund {Name}], din mat tillagas av {order.restaurant.Name}");
+				break;
+			case "Levererar":
+				Console.WriteLine("Budet är på väg med din mat!");
+				break;
+
+            case "Levererad":
+				Console.WriteLine($"[Kund {Name}] Smaklig måltid!" +
+					$" Din mat har levererats till.");
+				break;
+			case "Avbruten":
 				Console.WriteLine($"[Kund {Name}] Din order #{order.orderId} har blivit avbruten.");
 				break;
 		}
