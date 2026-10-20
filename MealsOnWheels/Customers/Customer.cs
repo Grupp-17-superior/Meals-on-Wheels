@@ -10,14 +10,8 @@ public class Customer : IOrderObserver
 	public string PhoneNumber { get; set; }
 	public string Email { get; set; }
 
-    // Historik över alla ordrar som kunden har lagt
-
-    //Behöver vi en historik över alla ordrar som kunden har lagt?
-    public List<Order> OrderHistory { get; private set; } = new List<Order>();
-
 	public Customer(int customerId, string name, string deliveryAddress, string phoneNumber, string email)
 	{
-		//Behöver vi customerID?
 		CustomerId = customerId;
 		Name = name;
 		DeliveryAddress = deliveryAddress;

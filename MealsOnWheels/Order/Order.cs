@@ -17,7 +17,6 @@ public class Order //det som behövs för state i order /sofia
 
     private IDiscountStrategy? discountStrategy;
     private IOrderState currentState = new ReceivedState(); //referens till state
-    
 
     public Order(Customer customer, Restaurant restaurant, List<OrderItems> orderItems)
     {
