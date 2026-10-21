@@ -10,7 +10,6 @@ public class RestaurantService
     // Exempel på att Skapa restauranger och deras menyer så vi slipper att kladda i main
     public void CreateRestaurant()
     {
-        
         // 1. Swedish Pizzeria
         Restaurant pizzeria = new Restaurant(1, "Isaks pannpizza", "lökgatan 28", "07667676767", 200m, 30);
         pizzeria.AddMenuItem(new MenuItem("Kebabpizza", 110.98m));
