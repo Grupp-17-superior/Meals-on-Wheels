@@ -22,6 +22,38 @@ public class DeliveryDriver : IOrderObserver
 	}
 
 
+	//Bör skötas av DeliveryService
+
+	//public void AssignOrder(Order order)
+	//{
+	//	if (!IsAvailable)
+	//	{
+	//		Console.WriteLine($"[Bud {Name}] Kan inte ta emot order #{order.orderId} eftersom budet upptaget.");
+	//		return;
+	//	}
+
+	//	CurrentOrder = order;
+	//	IsAvailable = false;
+	//	order.deliveryDriver = this;
+	//	order.AddObserver(this); // Registrera budet som observatör på ordern
+
+	//	Console.WriteLine($"[Bud {Name}] Har tilldelats order #{order.orderId}. Levereras med {VehicleType}.");
+	//}
+
+	// Slutför en leverans
+
+
+	public void CompleteDelivery()
+	{
+		if (CurrentOrder != null)
+		{
+			Console.WriteLine($"[Bud {Name}] Har slutfört leveransen av order #{CurrentOrder.orderId}.");
+			CurrentOrder.RemoveObserver(this);
+			CurrentOrder = null;
+			IsAvailable = true;
+		}
+	}
+
 	// Implementering av IOrderObserver
 	public void Update(Order order)
 	{
