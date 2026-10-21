@@ -71,6 +71,7 @@ public class ConsoleMenu
 
     public void ShowMenu(Restaurant restaurant)
     {
+        List<OrderItems> items = new List<OrderItems>();
         while (true)
         {
             //Fixa så att användaren får välja hur många av varorna de vill ha, samt använda deras val i new OrderItems()
@@ -82,23 +83,26 @@ public class ConsoleMenu
             char choice = Console.ReadKey(true).KeyChar;
             int index = choice - '1';
 
-            List<OrderItems> items = new List<OrderItems>();
-
             if (index >= 0 && index < restaurant.Menu.Count)
             {
                 var selectedItem = restaurant.Menu[index];
-                OrderItems orderItem = new OrderItems(selectedItem, 1);
-                items.Add(orderItem);
-                break;
+                int selectedAmount;
+                Console.WriteLine("Hur många vill du ha?");
+                if (int.TryParse(Console.ReadLine(), out selectedAmount) && selectedAmount > 0)
+                {
+                    OrderItems orderItem = new OrderItems(selectedItem, selectedAmount);
+                    items.Add(orderItem);
+                }
+                else
+                {
+                    Console.WriteLine("Ogiltigt antal");
+                }
             }
 
             else
             {
                 Console.WriteLine("Oglitigt val");
             }
-
-            break;
         }
-
     }
 }
