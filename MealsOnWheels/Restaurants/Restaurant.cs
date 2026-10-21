@@ -15,9 +15,12 @@ public class Restaurant : IOrderObserver
     public List<MenuItem> Menu { get; set; } = new List<MenuItem>();
 
     // Lista på aktiva beställningar hos restaurangen
+    //Behöver restaurangen hålla koll på alla aktiva ordrar? Eller ska det skötas av OrderService?
+    public List<Order> ActiveOrders { get; set; } = new List<Order>();
 
 	public Restaurant(int restaurantId, string name, string address, string phoneNumber, decimal minimumOrderAmount, int estimatedDeliveryTime)
 	{
+        //Behöver vi restaurantID?
         RestaurantId = restaurantId;
 		Name = name;
 		Address = address;

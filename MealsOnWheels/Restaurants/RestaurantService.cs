@@ -10,6 +10,7 @@ public class RestaurantService
     // Exempel på att Skapa restauranger och deras menyer så vi slipper att kladda i main
     public void CreateRestaurant()
     {
+        Restaurant pizzeria = new Restaurant(1, "Pizzeria", "123 Main St", "555-1234");
 
         
         // 1. Swedish Pizzeria
