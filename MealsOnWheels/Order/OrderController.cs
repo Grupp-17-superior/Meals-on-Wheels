@@ -53,4 +53,22 @@ public class OrderController
 
 
     //}
+
+
+    // simulera order när payment blivit godkänd
+    public void SimulateOrder(Order order)
+    {
+        order.NotifyObservers();
+
+        Thread.Sleep(2000);
+        order.NextState();
+
+        Thread.Sleep(3000);
+        order.NextState();
+
+        Thread.Sleep(2000);
+        order.NextState();
+    }
+
+
 }
