@@ -32,6 +32,7 @@ public class Order //det som behövs för state i order /sofia
     public void SetState(IOrderState newState) //ändra state
     {
         currentState = newState;
+        NotifyObservers(); // skicka notifiering till observatörer varje statebyte
     }
 
     public void NextState() //flytta mellan states
