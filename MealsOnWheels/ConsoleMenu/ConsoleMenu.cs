@@ -117,10 +117,8 @@ public class ConsoleMenu
             if (choice == '0')
             {
                 Customer customer = _customerService.CreateCustomer();
-                _orderController.CreateOrder(restaurant, customer, items);
+                _orderController.CreateOrder(customer, restaurant, items);
                 _orderController.ProcessPayment();
-
-                break;
             }
         }
     }
