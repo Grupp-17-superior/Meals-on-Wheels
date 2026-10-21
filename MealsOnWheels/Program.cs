@@ -10,5 +10,10 @@ class Program
 		DeliveryService deliveryService = new DeliveryService();
         OrderController orderController = new OrderController(deliveryService);
 		RestaurantService restaurantService = new RestaurantService();
+		restaurantService.CreateRestaurant();
+		ConsoleMenu consoleMenu = new ConsoleMenu(restaurantService);
+
+		consoleMenu.StartMenu();
+
     }
 }
