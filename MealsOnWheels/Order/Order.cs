@@ -20,8 +20,8 @@ public class Order //det som behövs för state i order /sofia
 
     public Order(Customer customer, Restaurant restaurant, List<OrderItems> orderItems)
     {
-        this.restaurant = restaurant;
         this.customer = customer;
+        this.restaurant = restaurant;
         this.orderItems = orderItems;
         orderId = nextId++;
 

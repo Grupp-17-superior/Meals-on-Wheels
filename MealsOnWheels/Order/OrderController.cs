@@ -8,7 +8,6 @@ public class OrderController
 {
     private DeliveryService _deliveryService;
     private List<Order> _orders = new List<Order>();
-
     public OrderController(DeliveryService deliveryService)
     {
         _deliveryService = deliveryService;
@@ -29,7 +28,6 @@ public class OrderController
         // Beräknar och kontrollerar beställningens totalsumma
         decimal orderTotal = orderItems.Sum(
             item => item.MenuItem.Price * item.Quantity);
-
 
         if (!restaurant.MeetsMinimumOrder(orderTotal))
         {

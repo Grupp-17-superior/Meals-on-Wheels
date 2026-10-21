@@ -7,4 +7,35 @@ namespace MealsOnWheels;
 public class CustomerService
 {
     private List<Customer> _customers;
+
+
+    public CustomerService()
+    {
+        _customers = new List<Customer>();
+    }
+
+    public Customer CreateCustomer()
+    {
+        Console.WriteLine("Ange kundens namn:");
+        string name = Console.ReadLine();
+        Console.WriteLine("Ange kundens leveransadress:");
+        string deliveryAddress = Console.ReadLine();
+        Console.WriteLine("Ange kundens telefonnummer:");
+        string phoneNumber = Console.ReadLine();
+        Console.WriteLine("Ange kundens e-postadress:");
+        string email = Console.ReadLine();
+        int customerId = _customers.Count + 1; // Skapar ett unikt kund-ID baserat på antalet kunder i listan
+        Customer newCustomer = new Customer(name, customerId, deliveryAddress, phoneNumber, email);
+        AddCustomer(newCustomer);
+        Console.WriteLine($"Kund {name} har skapats med ID {customerId}.");
+        return newCustomer;
+    }
+    public void AddCustomer(Customer customer)
+    {
+        if (customer == null)
+        {
+            throw new ArgumentException("Ogiltig kund.");
+        }
+        _customers.Add(customer);
+    }
 }
