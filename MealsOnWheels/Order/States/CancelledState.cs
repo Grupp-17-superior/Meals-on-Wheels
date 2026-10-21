@@ -5,9 +5,16 @@ namespace MealsOnWheels;
 
 public class CancelledState : IOrderState
 {
-    public void Next(Order order) => Console.WriteLine("Ordern är avbruten.");
+    public void Next(Order order)
+    {
+        // Inget händer, allt är avbrutet i simuleringen
+    }
 
-    public void Cancel(Order order) => Console.WriteLine("Ordern är redan avbruten.");
+    public void Cancel(Order order)
+    {
+        // Inget händer, allt är avbrutet i simuleringen
+    }
+
 
     public string GetStatusName() => "Avbruten";
 }
