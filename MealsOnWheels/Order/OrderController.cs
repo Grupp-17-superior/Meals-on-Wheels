@@ -40,7 +40,7 @@ public class OrderController
         return order;
     }
 
-public void ProcessPayment(Order order)
+public void ProcessPayment(Order order, IDiscountStrategy? strategy)
     {
         if (order == null)
         {
