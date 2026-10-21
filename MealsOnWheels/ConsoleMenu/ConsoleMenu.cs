@@ -7,14 +7,12 @@ public class ConsoleMenu
 {
     RestaurantService _restaurantService;
     OrderController _orderController;
-
-    CustomerService _customerService;
+    CheckoutMenu checkoutMenu = new CheckoutMenu();
 
     public ConsoleMenu(RestaurantService restaurants, OrderController orderController, CustomerService customerService)
     {
         _restaurantService = restaurants;
         _orderController = orderController;
-        _customerService = customerService;
     }
 
     public void StartMenu()
@@ -116,9 +114,7 @@ public class ConsoleMenu
 
             if (choice == '0')
             {
-                Customer customer = _customerService.CreateCustomer();
-                _orderController.CreateOrder(customer, restaurant, items);
-                _orderController.ProcessPayment();
+
             }
         }
     }
