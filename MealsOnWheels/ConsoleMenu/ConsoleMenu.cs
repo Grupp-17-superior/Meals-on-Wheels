@@ -103,6 +103,13 @@ public class ConsoleMenu
             {
                 Console.WriteLine("Oglitigt val");
             }
+
+            if (choice == '0')
+            {
+                Customer customer = _customerService.CreateCustomer();
+                _orderController.CreateOrder(customer, restaurant, items);
+                _orderController.ProcessPayment();
+            }
         }
     }
 }
