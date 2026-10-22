@@ -11,7 +11,7 @@ public class DeliveryDriver : IOrderObserver
 	public bool IsAvailable { get; set; } = true;
 
 	// Aktuell order som budet levererar just nu
-	public Order? CurrentOrder { get; private set; }
+	public Order? CurrentOrder { get; internal set; }
 
 	public DeliveryDriver(int driverId, string name, string phoneNumber, string vehicleType)
 	{
@@ -22,25 +22,7 @@ public class DeliveryDriver : IOrderObserver
 	}
 
 
-	//Bör skötas av DeliveryService
 
-	//public void AssignOrder(Order order)
-	//{
-	//	if (!IsAvailable)
-	//	{
-	//		Console.WriteLine($"[Bud {Name}] Kan inte ta emot order #{order.orderId} eftersom budet upptaget.");
-	//		return;
-	//	}
-
-	//	CurrentOrder = order;
-	//	IsAvailable = false;
-	//	order.deliveryDriver = this;
-	//	order.AddObserver(this); // Registrera budet som observatör på ordern
-
-	//	Console.WriteLine($"[Bud {Name}] Har tilldelats order #{order.orderId}. Levereras med {VehicleType}.");
-	//}
-
-	// Slutför en leverans
 
 
 	public void CompleteDelivery()
