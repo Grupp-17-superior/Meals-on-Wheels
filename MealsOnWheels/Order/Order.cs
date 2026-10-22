@@ -8,7 +8,7 @@ public class Order //det som behövs för state i order /sofia
 {
     public int orderId;
     private static int nextId = 0;
-
+    public int? DriverID { get; set; }
     public Restaurant restaurant;
     public Customer customer;
 

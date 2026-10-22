@@ -6,10 +6,13 @@ namespace MealsOnWheels;
 public class ConsoleMenu
 {
     RestaurantService _restaurantService;
+    OrderController _orderController;
+    CheckoutMenu checkoutMenu = new CheckoutMenu();
 
-    public ConsoleMenu(RestaurantService restaurants)
+    public ConsoleMenu(RestaurantService restaurants, OrderController orderController, CustomerService customerService)
     {
         _restaurantService = restaurants;
+        _orderController = orderController;
     }
 
     public void StartMenu()
@@ -80,8 +83,11 @@ public class ConsoleMenu
             {
                 Console.WriteLine($"{i + 1} {restaurant.Menu[i].Name}");
             }
+            Console.WriteLine("0. Gå till checkout");
+
             char choice = Console.ReadKey(true).KeyChar;
             int index = choice - '1';
+
 
             if (index >= 0 && index < restaurant.Menu.Count)
             {
@@ -90,9 +96,11 @@ public class ConsoleMenu
                 Console.WriteLine("Hur många vill du ha?");
                 if (int.TryParse(Console.ReadLine(), out selectedAmount) && selectedAmount > 0)
                 {
-                    OrderItems orderItem = new OrderItems(selectedItem, selectedAmount);
-                    items.Add(orderItem);
+                    OrderItems orderItems = new OrderItems(selectedItem, selectedAmount);
+                    items.Add(orderItems);
+                    Console.WriteLine($"{selectedAmount}st {selectedItem.Name}");
                 }
+
                 else
                 {
                     Console.WriteLine("Ogiltigt antal");
@@ -106,9 +114,7 @@ public class ConsoleMenu
 
             if (choice == '0')
             {
-                Customer customer = _customerService.CreateCustomer();
-                _orderController.CreateOrder(customer, restaurant, items);
-                _orderController.ProcessPayment();
+
             }
         }
     }
