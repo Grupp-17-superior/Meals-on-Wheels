@@ -40,17 +40,14 @@ public class OrderController
         return order;
     }
 
-    //public bool ProcessPayment(Order order, decimal amount)
-    //{
-    //    if (order == null || amount <= 0)
-    //    {
-    //        return false;
-    //    }
-
-    //    // Hantera betalning genom att använda Order.CalculateTotalPrice() och sedan använda Strategies för att applicera rabatter.
-
-
-    //}
+public void ProcessPayment(Order order, IDiscountStrategy? strategy)
+    {
+        if (order == null)
+        {
+            throw new ArgumentException("Ogiltig beställning.");
+        }
+        decimal finalPrice = strategy.Apply(order.CalculateTotalPrice());
+    }
 
 
     // simulera order när payment blivit godkänd

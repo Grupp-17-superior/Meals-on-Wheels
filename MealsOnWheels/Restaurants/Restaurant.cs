@@ -20,7 +20,6 @@ public class Restaurant : IOrderObserver
 
 	public Restaurant(int restaurantId, string name, string address, string phoneNumber, decimal minimumOrderAmount, int estimatedDeliveryTime)
 	{
-        //Behöver vi restaurantID?
         RestaurantId = restaurantId;
 		Name = name;
 		Address = address;

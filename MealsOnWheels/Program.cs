@@ -12,9 +12,10 @@ class Program
 		RestaurantService restaurantService = new RestaurantService();
 		CustomerService customerService = new CustomerService();
         restaurantService.CreateRestaurant();
-		ConsoleMenu consoleMenu = new ConsoleMenu(restaurantService, orderController, customerService);
+        CheckoutMenu checkoutMenu = new CheckoutMenu(orderController, customerService);
+        ConsoleMenu consoleMenu = new ConsoleMenu(restaurantService, checkoutMenu);
 
-		consoleMenu.StartMenu();
+        consoleMenu.StartMenu();
 
     }
 }
