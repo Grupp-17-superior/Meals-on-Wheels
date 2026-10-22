@@ -1,15 +1,17 @@
-﻿using System;
+﻿using MealsOnWheels.Customers;
+using System;
 using System.Collections.Generic;
 using System.Text;
 namespace MealsOnWheels;
 
 public class Order //det som behövs för state i order /sofia
 {
-    public int orderId;
+    public int orderId; // jag tror att detta id behöver vara prvate - cc
     private static int nextId = 0;
     public int? DriverID { get; set; }
     public Restaurant restaurant;
     public Customer customer;
+
     public DeliveryDriver? deliveryDriver;
 
     private List<OrderItems> orderItems = new List<OrderItems>();
@@ -25,7 +27,10 @@ public class Order //det som behövs för state i order /sofia
         this.orderItems = orderItems;
         orderId = nextId++;
 
-        AddObserver(customer);
+        CustomerNotificationObserver notification =
+    new CustomerNotificationObserver(customer);
+
+        AddObserver(notification);
         AddObserver(restaurant);
     }
 
