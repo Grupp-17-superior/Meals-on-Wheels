@@ -31,10 +31,10 @@ namespace MealsOnWheels.Customers
             Console.WriteLine("Ange din e-postadress:");
             string email = Console.ReadLine() ?? "";
 
-            Customer customer = customerService.CreateCustomer(name, address, phone, email);//vet ej vad som är fel
+            Customer customer = customerService.CreateCustomer(name, address, phone, email);
 
             Console.WriteLine(
-                $"Kund skapad! Ditt kund-ID är {customer.GetCustomerId()}");// vet ej vad som är fel
+                $"Kund skapad! Ditt kund-ID är {customer.GetCustomerId()}");
         }
     }
 }

@@ -6,13 +6,12 @@ namespace MealsOnWheels;
 
 public class Order //det som behövs för state i order /sofia
 {
-    public int orderId;
+    public int orderId; // jag tror att detta id behöver vara prvate - cc
     private static int nextId = 0;
     public int? DriverID { get; set; }
     public Restaurant restaurant;
     public Customer customer;
 
-    public CustomerNotificationObserver customerNotificationObserver;
     public DeliveryDriver? deliveryDriver;
 
     private List<OrderItems> orderItems = new List<OrderItems>();
@@ -21,15 +20,17 @@ public class Order //det som behövs för state i order /sofia
     private IDiscountStrategy? discountStrategy;
     private IOrderState currentState = new ReceivedState(); //referens till state
 
-    public Order(Customer customer, CustomerNotificationObserver customerNotificationObserver, Restaurant restaurant, List<OrderItems> orderItems)
+    public Order(Customer customer, Restaurant restaurant, List<OrderItems> orderItems)
     {
         this.customer = customer;
-        this.customerNotificationObserver = customerNotificationObserver;
         this.restaurant = restaurant;
         this.orderItems = orderItems;
         orderId = nextId++;
 
-        AddObserver(customerNotificationObserver);
+        CustomerNotificationObserver notification =
+    new CustomerNotificationObserver(customer);
+
+        AddObserver(notification);
         AddObserver(restaurant);
     }
 
