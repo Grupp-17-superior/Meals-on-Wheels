@@ -6,7 +6,7 @@ namespace MealsOnWheels;
 
 public class Order //det som behövs för state i order /sofia
 {
-    public int orderId; // jag tror att detta id behöver vara prvate - cc
+    public int orderId { get; }
     private static int nextId = 0;
     public int? DriverID { get; set; }
     public Restaurant restaurant;

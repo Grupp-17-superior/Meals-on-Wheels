@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MealsOnWheels.Customers;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -7,50 +8,52 @@ namespace MealsOnWheels;
 public class CheckoutMenu
 {
     StrategyMenu strategyMenu = new StrategyMenu();
-    CustomerService customerService;
+    CustomerController customerController;
     OrderController orderController;
-    IDiscountStrategy? strategy;
+    IDiscountStrategy strategy = new NoDiscount();
 
-    public CheckoutMenu(OrderController orderController, CustomerService customerService)
+    public CheckoutMenu(OrderController orderController, CustomerController customerController)
     {
         this.orderController = orderController;
-        this.customerService = customerService;
+        this.customerController = customerController;
     }
 
 
     public void Menu(Restaurant restaurant, List<OrderItems> items)
     {
-        Console.WriteLine("1. Fortsätt till kassan");
-        Console.WriteLine("2. Rabatter");
-        Console.WriteLine("3. Tillbaka till restaurangen");
-        Console.WriteLine("4. Avsluta");
-
-        char choice = Console.ReadKey(true).KeyChar;
-
-
-        switch (choice)
+        while (true)
         {
-            case '1':
-                Customer customer = customerService.CreateCustomer();
-                Order order = orderController.CreateOrder(customer, restaurant, items);
-                orderController.ProcessPayment(order, strategy);
-                break;
+            Console.WriteLine("1. Fortsätt till kassan");
+            Console.WriteLine("2. Rabatter");
+            Console.WriteLine("3. Tillbaka till restaurangen");
+            Console.WriteLine("4. Avsluta");
 
-            case '2':
-                strategy = strategyMenu.SelectStrategy();
-                break;
+            char choice = Console.ReadKey(true).KeyChar;
 
-            case '3':
-                //ConsoleMenu;
-                return;
 
-            case '4':
-                Environment.Exit(0);
-                break;
+            switch (choice)
+            {
+                case '1':
+                    Customer customer = customerController.RegisterCustomer();
+                    Order order = orderController.CreateOrder(customer, restaurant, items);
+                    orderController.ProcessPayment(order, strategy);
+                    break;
 
-            default:
-                Console.WriteLine("Ogiltigt val. Försök igen.");
-                break;
+                case '2':
+                    strategy = strategyMenu.SelectStrategy();
+                    break;
+
+                case '3':
+                    return;
+
+                case '4':
+                    Environment.Exit(0);
+                    break;
+
+                default:
+                    Console.WriteLine("Ogiltigt val. Försök igen.");
+                    break;
+            }
         }
     }
 

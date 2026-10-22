@@ -17,7 +17,7 @@ namespace MealsOnWheels.Customers
         {
             return customerService.CreateCustomer(name, address, phone, email);
         }
-        public void RegisterCustomer()
+        public Customer RegisterCustomer()
         {
             Console.WriteLine("Ange ditt namn:");
             string name = Console.ReadLine() ?? "";
@@ -35,6 +35,8 @@ namespace MealsOnWheels.Customers
 
             Console.WriteLine(
                 $"Kund skapad! Ditt kund-ID är {customer.GetCustomerId()}");
+
+            return customer;
         }
     }
 }

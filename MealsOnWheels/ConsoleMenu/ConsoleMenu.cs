@@ -21,7 +21,7 @@ public class ConsoleMenu
             Console.WriteLine("Välkommen!");
             Console.WriteLine("Välj ett alternativ");
             Console.WriteLine("1. Visa restauranger");
-            Console.WriteLine("2. En till sak");
+            Console.WriteLine("2. Kolla status");
             Console.WriteLine("3. En annan sak");
 
             char choice = Console.ReadKey(true).KeyChar;
@@ -35,6 +35,7 @@ public class ConsoleMenu
                     }
                 case '2':
                     { 
+
                         break;
                     }
 

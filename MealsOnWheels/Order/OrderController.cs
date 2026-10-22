@@ -48,6 +48,9 @@ public void ProcessPayment(Order order, IDiscountStrategy? strategy)
             throw new ArgumentException("Ogiltig beställning.");
         }
         decimal finalPrice = strategy.Apply(order.CalculateTotalPrice());
+
+        Console.WriteLine($"Slutpris: {finalPrice}kr");
+        string test = Console.ReadLine();
     }
 
 
