@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MealsOnWheels.Customers;
+using System;
 using System.Collections.Generic;
 using System.Text;
 namespace MealsOnWheels;
@@ -10,6 +11,8 @@ public class Order //det som behövs för state i order /sofia
 
     public Restaurant restaurant;
     public Customer customer;
+
+    public CustomerNotificationObserver customerNotificationObserver;
     public DeliveryDriver? deliveryDriver;
 
     private List<OrderItems> orderItems = new List<OrderItems>();
@@ -18,14 +21,15 @@ public class Order //det som behövs för state i order /sofia
     private IDiscountStrategy? discountStrategy;
     private IOrderState currentState = new ReceivedState(); //referens till state
 
-    public Order(Customer customer, Restaurant restaurant, List<OrderItems> orderItems)
+    public Order(Customer customer, CustomerNotificationObserver customerNotificationObserver, Restaurant restaurant, List<OrderItems> orderItems)
     {
         this.customer = customer;
+        this.customerNotificationObserver = customerNotificationObserver;
         this.restaurant = restaurant;
         this.orderItems = orderItems;
         orderId = nextId++;
 
-        AddObserver(customer);
+        AddObserver(customerNotificationObserver);
         AddObserver(restaurant);
     }
 
