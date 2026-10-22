@@ -26,7 +26,8 @@ public class CheckoutMenu
         Console.WriteLine("4. Avsluta");
 
         char choice = Console.ReadKey(true).KeyChar;
-        
+
+
         switch (choice)
         {
             case '1':
@@ -40,7 +41,7 @@ public class CheckoutMenu
                 break;
 
             case '3':
-                checkoutMenu;
+                //ConsoleMenu;
                 return;
 
             case '4':

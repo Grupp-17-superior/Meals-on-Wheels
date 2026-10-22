@@ -46,7 +46,7 @@ public void ProcessPayment(Order order, IDiscountStrategy? strategy)
         {
             throw new ArgumentException("Ogiltig beställning.");
         }
-        decimal totalPrice = order.CalculateTotalPrice();
+        decimal finalPrice = strategy.Apply(order.CalculateTotalPrice());
     }
 
 
