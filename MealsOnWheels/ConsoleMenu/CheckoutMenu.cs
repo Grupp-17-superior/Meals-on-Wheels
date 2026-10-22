@@ -19,7 +19,7 @@ public class CheckoutMenu
     }
 
 
-    public void Menu(Restaurant restaurant, List<OrderItems> items)
+    public bool Menu(Restaurant restaurant, List<OrderItems> items)
     {
         while (true)
         {
@@ -37,14 +37,14 @@ public class CheckoutMenu
                     Customer customer = customerController.RegisterCustomer();
                     Order order = orderController.CreateOrder(customer, restaurant, items);
                     orderController.ProcessPayment(order, strategy);
-                    break;
+                    return true;
 
                 case '2':
                     strategy = strategyMenu.SelectStrategy();
                     break;
 
                 case '3':
-                    return;
+                    return false;
 
                 case '4':
                     Environment.Exit(0);

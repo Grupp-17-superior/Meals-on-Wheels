@@ -35,7 +35,6 @@ public class ConsoleMenu
                     }
                 case '2':
                     { 
-
                         break;
                     }
 
@@ -62,8 +61,9 @@ public class ConsoleMenu
 
             if (index >= 0 && index < restaurants.Count)
             {
-                ShowMenu(restaurants[index]);
-                break;
+                bool completed = ShowMenu(restaurants[index]);
+                if (completed)
+                    break;
             }
             else
             {
@@ -72,7 +72,7 @@ public class ConsoleMenu
         }
     }
 
-    public void ShowMenu(Restaurant restaurant, List<OrderItems>? items = null)
+    public bool ShowMenu(Restaurant restaurant)
     {
         List<OrderItems> Cartitems = new List<OrderItems>();
         while (true)
@@ -114,7 +114,9 @@ public class ConsoleMenu
 
             if (choice == '0')
             {
-                _checkoutMenu.Menu(restaurant, Cartitems);
+                bool completed = _checkoutMenu.Menu(restaurant, Cartitems);
+                if (completed)
+                    return true;
             }
         }
     }
