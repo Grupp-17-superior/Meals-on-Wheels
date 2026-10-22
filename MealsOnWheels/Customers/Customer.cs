@@ -20,5 +20,6 @@ public class Customer
         _email = email;
     }
 
-    public string GetName() => _name; // detta gör så att jag kan koppla kundens namn fast att den är privat i klassen. (getter(fat arrow function)))
+    public string GetName() => _name;// detta gör så att jag kan koppla kundens namn fast att den är privat i klassen. (getter(fat arrow function)))
+    public int GetCustomerId() => _customerId;
 }

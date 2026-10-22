@@ -13,9 +13,28 @@ namespace MealsOnWheels.Customers
             this.customerService = customerService;
         }
 
-        public Customer CreateCustomer(int customerId, string name, string address, string phone, string email)
+        public Customer CreateCustomer(string name, string address, string phone, string email)
         {
-            return customerService.CreateCustomer(customerId, name, address, phone, email);
+            return customerService.CreateCustomer(name, address, phone, email);
+        }
+        public void RegisterCustomer()
+        {
+            Console.WriteLine("Ange ditt namn:");
+            string name = Console.ReadLine() ?? "";
+
+            Console.WriteLine("Ange din leveransadress:");
+            string address = Console.ReadLine() ?? "";
+
+            Console.WriteLine("Ange ditt telefonnummer:");
+            string phone = Console.ReadLine() ?? "";
+
+            Console.WriteLine("Ange din e-postadress:");
+            string email = Console.ReadLine() ?? "";
+
+            Customer customer = customerService.CreateCustomer(name, address, phone, email);//vet ej vad som är fel
+
+            Console.WriteLine(
+                $"Kund skapad! Ditt kund-ID är {customer.GetCustomerId()}");// vet ej vad som är fel
         }
     }
 }

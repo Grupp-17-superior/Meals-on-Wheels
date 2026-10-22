@@ -23,7 +23,7 @@ namespace MealsOnWheels.Customers
             switch (status)
             {
                 case "Mottagen":
-                    Console.WriteLine($"[Kund {customer.GetName()} Din order #{order.orderId} " +
+                    Console.WriteLine($"[Kund {customer.GetName()}] Din order #{order.orderId} " +
                 $"hos {order.restaurant.Name} har tagits emot");
                     break;
 
@@ -36,8 +36,7 @@ namespace MealsOnWheels.Customers
                     break;
 
                 case "Levererad":
-                    Console.WriteLine($"[Kund {customer.GetName()}] Smaklig måltid!" +
-                        $" Din mat har levererats till.");
+                    Console.WriteLine($"[Kund {customer.GetName()}] Din mat har levererats, Smaklig måltid!");
                     break;
                 case "Avbruten":
                     Console.WriteLine($"[Kund {customer.GetName()}] Din order #{order.orderId} har blivit avbruten.");

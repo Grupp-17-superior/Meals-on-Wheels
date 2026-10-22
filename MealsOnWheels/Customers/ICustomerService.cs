@@ -6,6 +6,6 @@ namespace MealsOnWheels.Customers
 {
     public interface ICustomerService
     {
-        Customer CreateCustomer(int customerId, string name, string deliveryAddress, string phoneNumber, string email);
+        Customer CreateCustomer(string name, string deliveryAddress, string phoneNumber, string email);
     }
 }
