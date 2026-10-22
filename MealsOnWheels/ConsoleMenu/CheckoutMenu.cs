@@ -37,6 +37,7 @@ public class CheckoutMenu
                     Customer customer = customerController.RegisterCustomer();
                     Order order = orderController.CreateOrder(customer, restaurant, items);
                     orderController.ProcessPayment(order, strategy);
+                    _ = order.ProcessOrderAsync();
                     return true;
 
                 case '2':
