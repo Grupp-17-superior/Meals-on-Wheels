@@ -50,7 +50,7 @@ public class ConsoleMenu
             }
         }
     }
-
+     
     public void RestaurantsMenu() 
     {
         while (true)
