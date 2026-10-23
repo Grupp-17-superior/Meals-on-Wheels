@@ -1,8 +1,6 @@
-﻿using MealsOnWheels.Customers;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
-
 namespace MealsOnWheels;
 
 public class CheckoutMenu
@@ -10,12 +8,14 @@ public class CheckoutMenu
     StrategyMenu strategyMenu = new StrategyMenu();
     CustomerController customerController;
     OrderController orderController;
+    PaymentService paymentService = new PaymentService();
     IDiscountStrategy strategy = new NoDiscount();
 
-    public CheckoutMenu(OrderController orderController, CustomerController customerController)
+    public CheckoutMenu(OrderController orderController, CustomerController customerController, PaymentService paymentService)
     {
         this.orderController = orderController;
         this.customerController = customerController;
+        this.paymentService = paymentService;
     }
 
 
@@ -34,10 +34,59 @@ public class CheckoutMenu
             switch (choice)
             {
                 case '1':
-                    Customer customer = customerController.RegisterCustomer();
-                    Order order = orderController.CreateOrder(customer, restaurant, items);
-                    orderController.ProcessPayment(order, strategy);
-                    return true;
+                    {
+                        Customer customer = customerController.RegisterCustomer();
+
+                        Order? order = orderController.CreateOrder(customer, restaurant, items);
+                        
+                        if (order == null)
+                        {
+                            Console.WriteLine("Ordern kunde inte skapas. Försök igen.");
+                            break;
+                        }
+
+                        //applicerar den valda rabattstrategin
+                        order.SetDiscountStrategy(strategy);
+                        decimal total = order.CalculateFinalPrice();
+
+                        Console.WriteLine($" Att betala: {total}kr");
+
+                        // välj betalningsmetod
+                        Console.WriteLine("Välj betalningsmetod:");
+                        Console.WriteLine("1. Kort");
+                        Console.WriteLine("2. Swosh");
+
+                        string paymentChoice = Console.ReadLine() ?? "";
+
+                        IPaymentStrategy paymentStrategy;
+
+                        switch (paymentChoice)
+                        {
+                            case "1":
+                                paymentStrategy = new CardPayment();
+                                break;
+
+                            case "2":
+                                paymentStrategy = new SwoshPayment();
+                                break;
+
+                            default:
+                                Console.WriteLine("Ogiltigt val av betalningsmetod.");
+                                return false;
+                        }
+
+                        bool paymentSuccess = paymentService.ProcessPayment(paymentStrategy, total);
+
+                        if (paymentSuccess)
+                        {
+                            Console.WriteLine("Betalning lyckades! Tack för din beställning.");
+                            orderController.SimulateOrder(order);
+                            return true;
+                        }
+
+                        Console.WriteLine("Betalning misslyckades. Försök igen.");
+                        break;
+                    }
 
                 case '2':
                     strategy = strategyMenu.SelectStrategy();
@@ -48,7 +97,7 @@ public class CheckoutMenu
 
                 case '4':
                     Environment.Exit(0);
-                    break;
+                    return false;
 
                 default:
                     Console.WriteLine("Ogiltigt val. Försök igen.");

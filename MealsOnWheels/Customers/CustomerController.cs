@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace MealsOnWheels.Customers
-{
+namespace MealsOnWheels;
     public class CustomerController
     {
         private readonly ICustomerService customerService;
@@ -39,4 +38,3 @@ namespace MealsOnWheels.Customers
             return customer;
         }
     }
-}

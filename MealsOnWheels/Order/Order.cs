@@ -74,7 +74,7 @@ public class Order //det som behövs för state i order /sofia
     }
 
     public decimal CalculateTotalPrice()
-    {
+    { 
         decimal total = 0;
 
         foreach (var item in orderItems)
@@ -84,5 +84,23 @@ public class Order //det som behövs för state i order /sofia
 
         return total;
     }
+    
+    public void SetDiscountStrategy(IDiscountStrategy strategy)//sparar den rabbatstrategi kunden har valt
+    {
+        discountStrategy = strategy;
+    }
+
+    public decimal CalculateFinalPrice() // beräknar ordens slutpris efter rabbatstrategi har applicerats
+    {
+        decimal total = CalculateTotalPrice();
+
+        if (discountStrategy == null)
+        {
+            return total;
+        }
+
+        return discountStrategy.Apply(total);
+    }
+
 }
 
