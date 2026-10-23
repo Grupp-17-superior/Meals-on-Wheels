@@ -80,7 +80,7 @@ public class CheckoutMenu
                         if (paymentSuccess)
                         {
                             Console.WriteLine("Betalning lyckades! Tack för din beställning.");
-                            orderController.SimulateOrder(order);
+                            _ = order.ProcessOrderAsync();
                             return true;
                         }
 
