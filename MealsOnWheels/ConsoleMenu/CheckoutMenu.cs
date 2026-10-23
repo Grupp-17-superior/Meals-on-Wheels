@@ -23,6 +23,7 @@ public class CheckoutMenu
     {
         while (true)
         {
+            Console.Clear();
             Console.WriteLine("1. Fortsätt till kassan");
             Console.WriteLine("2. Rabatter");
             Console.WriteLine("3. Tillbaka till restaurangen");
@@ -52,6 +53,7 @@ public class CheckoutMenu
                         Console.WriteLine($" Att betala: {total}kr");
 
                         // välj betalningsmetod
+                        Console.Clear();
                         Console.WriteLine("Välj betalningsmetod:");
                         Console.WriteLine("1. Kort");
                         Console.WriteLine("2. Swosh");
@@ -79,11 +81,12 @@ public class CheckoutMenu
 
                         if (paymentSuccess)
                         {
+                            Console.Clear();
                             Console.WriteLine("Betalning lyckades! Tack för din beställning.");
                             orderController.SimulateOrder(order);
                             return true;
                         }
-
+                        Console.Clear();
                         Console.WriteLine("Betalning misslyckades. Försök igen.");
                         break;
                     }
