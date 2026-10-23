@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Xml.Linq;
 
-namespace MealsOnWheels.Customers
-{
+namespace MealsOnWheels;
     public class CustomerNotificationObserver : IOrderObserver
     {
         private readonly Customer customer;
@@ -44,4 +43,3 @@ namespace MealsOnWheels.Customers
             }
         }
     }
-}
