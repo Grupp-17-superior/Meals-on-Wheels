@@ -25,7 +25,7 @@ public class DeliveryDriver : IOrderObserver
 
 
 
-	public void CompleteDelivery()
+	public void CompleteDelivery(DeliveryService deliveryService)
 	{
 		if (CurrentOrder != null)
 		{
@@ -33,6 +33,8 @@ public class DeliveryDriver : IOrderObserver
 			CurrentOrder.RemoveObserver(this);
 			CurrentOrder = null;
 			IsAvailable = true;
+
+			deliveryService.ReturnDriver(this);
 		}
 	}
 

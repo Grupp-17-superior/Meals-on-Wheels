@@ -1,5 +1,4 @@
-﻿using MealsOnWheels.Customers;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 namespace MealsOnWheels;
@@ -62,11 +61,17 @@ public void ProcessPayment(Order order, IDiscountStrategy? strategy)
         Thread.Sleep(2000);
         order.NextState();
 
-        Thread.Sleep(3000);
+        Thread.Sleep(3000); //levererar
         order.NextState();
-
+        DeliveryDriver? driver = _deliveryService.AssignDriver(order);
+        if (driver == null)
+        {
+            Console.WriteLine("Det finns inget ledigt bud nu. Vänligen vänta tills en bud blir ledig.");
+            return;
+        }
         Thread.Sleep(2000);
-        order.NextState();
+        order.NextState();//levererad
+        driver.CompleteDelivery(_deliveryService); //budet blir ledig igen och sätts sist i kön.
     }
     //tar OrderID för kund sökning/staturs uppdatering
     public Order? GetOrderById(int orderId)

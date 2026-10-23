@@ -1,62 +1,48 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Text;
 namespace MealsOnWheels;
 
 public class DeliveryService    
 {
         
-    private List<DeliveryDriver> _driverList;
+    private Queue<DeliveryDriver> availableDrivers = new Queue<DeliveryDriver>(); // en kö med lediga bud
 
-
-    public DeliveryService()
+    public void AddAvailableDriver(DeliveryDriver driver) // lägger till ett nytt bud sist i kön
     {
-        _driverList = new List<DeliveryDriver>();
-    }
-
-
-    public void AddDriver(DeliveryDriver driver)
-    {
-        if(driver == null)
+        if (driver == null)
         {
-            throw new ArgumentException("Ogiltigt bud.");
+            throw new ArgumentNullException(nameof(driver));
         }
-        _driverList.Add(driver);
-
+        availableDrivers.Enqueue(driver);
     }
 
-    //behöver implementeras, koppla ihop orderID och driverID
-    public DeliveryDriver? AssignDriver(Order order)
+    public DeliveryDriver? AssignDriver(Order order) // tilldelar nästa lediga bud och tar bort det från kön
     {
         if (order == null)
         {
             throw new ArgumentNullException(nameof(order));
         }
-
-        // Tilldela inte en andra order till samma bud
-        // eller skriv över ett befintligt bud på ordern.
         if (order.deliveryDriver != null)
         {
             return order.deliveryDriver;
         }
 
-        DeliveryDriver? driver =
-            _driverList.Find(d => d.IsAvailable);
-
-        if (driver == null)
+        if (availableDrivers.Count == 0)
         {
             Console.WriteLine("Det finns inga lediga bud.");
             return null;
         }
 
-        // Koppla ihop ordern och budet
+        DeliveryDriver driver = availableDrivers.Dequeue(); // hämtar första budet från kön
+
         order.DriverID = driver.DriverId;
         order.deliveryDriver = driver;
-
+        
         driver.CurrentOrder = order;
         driver.IsAvailable = false;
 
-        // Budet får statusuppdateringar från ordern
         order.AddObserver(driver);
 
         Console.WriteLine(
@@ -65,4 +51,14 @@ public class DeliveryService
 
         return driver;
     }
+
+    public void ReturnDriver(DeliveryDriver driver)
+    {
+        if (driver.IsAvailable && driver.CurrentOrder == null && !availableDrivers.Contains(driver))
+        {
+            availableDrivers.Enqueue(driver); // lägger tillbaka budet sist i kön efter leverans
+        }
+    }
+
+
 }

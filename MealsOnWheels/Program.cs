@@ -1,5 +1,4 @@
-﻿using MealsOnWheels.Customers;
-using MealsOnWheels.Payment;
+﻿using MealsOnWheels.Delivery;
 using System;
 using System.Collections.Generic;
 
@@ -10,6 +9,7 @@ class Program
 	static void Main(string[] args)
 	{
 		DeliveryService deliveryService = new DeliveryService();
+        DeliveryDriverTestData.AddTestDrivers(deliveryService);
         OrderController orderController = new OrderController(deliveryService);
 		RestaurantService restaurantService = new RestaurantService();
         CustomerService customerService = new CustomerService();
