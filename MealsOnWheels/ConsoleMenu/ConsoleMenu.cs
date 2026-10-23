@@ -34,17 +34,20 @@ public class ConsoleMenu
             {
                 case '1':
                     {
+                        Console.Clear();
                         RestaurantsMenu();
                         break;
                     }
                 case '2':
                     {
+                        Console.Clear();
                         SearchOrderById();
                         break;
                     }
 
                 case '3':
                     { 
+                        Console.Clear();
                         break;
                     }
             }
@@ -73,6 +76,8 @@ public class ConsoleMenu
             else
             {
                 Console.WriteLine("Oglitigt val");
+                Thread.Sleep(2000);
+                Console.Clear();
             }
         }
     }
@@ -109,12 +114,16 @@ public class ConsoleMenu
                 else
                 {
                     Console.WriteLine("Ogiltigt antal");
+                    Thread.Sleep(2000);
+                    Console.Clear();
                 }
             }
 
             else
             {
                 Console.WriteLine("Oglitigt val");
+                Thread.Sleep(2000);
+                Console.Clear();
             }
 
             if (choice == '0')
@@ -135,12 +144,16 @@ public class ConsoleMenu
 
             if (order != null)
             {
+                Console.Clear();
                 Console.WriteLine($"Order hittad! Order-ID: {order.orderId}");
+                Thread.Sleep(2000);
 
             }
             else
             {
                 Console.WriteLine($"Ingen order hittades med ID {searchId}.");
+                Thread.Sleep(2000);
+                Console.Clear();
             }
         
         }
