@@ -195,15 +195,17 @@ public class ConsoleMenu
                 //Console.WriteLine($"selected items selected amount: {order.orderItems.Count}");
                 Console.WriteLine($"Status: {order.GetState()}");
                 Console.WriteLine($"Totalpris: {order.CalculateFinalPrice()} kr");
-                
-                Thread.Sleep(2000);
+
+                Console.WriteLine("\nTryck på valfri tangent för att återgå till huvudmenyn");
+                Console.ReadKey(true);
 
             }
             else
             {
                 Console.WriteLine($"Ingen order hittades med ID {searchId}.");
-                Thread.Sleep(2000);
-                Console.Clear();
+                
+                Console.WriteLine("\nTryck på valfri tangent för att återgå till huvudmenyn");
+                Console.ReadKey(true);
             }
         
         }

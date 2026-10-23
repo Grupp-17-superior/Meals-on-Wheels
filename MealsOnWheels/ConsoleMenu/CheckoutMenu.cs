@@ -90,11 +90,12 @@ public class CheckoutMenu
                             Console.Clear();
                             Console.WriteLine("Betalning lyckades! Tack för din beställning.");
                             _ = order.ProcessOrderAsync();
+                            Thread.Sleep(4000);
                             return true;
                         }
                         Console.Clear();
                         Console.WriteLine("Betalning misslyckades. Försök igen.");
-                        Thread.Sleep(2000);
+                        Thread.Sleep(4000);
                         Console.Clear();
                         break;
                     }
