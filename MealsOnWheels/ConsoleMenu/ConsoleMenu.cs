@@ -149,7 +149,7 @@ public class ConsoleMenu
             if (order != null)
             {
                 Console.WriteLine($"Order hittad! Order-ID: {order.orderId}");
-
+                Console.WriteLine($"Din order status är: {order.GetState()}");
 
             }
             else

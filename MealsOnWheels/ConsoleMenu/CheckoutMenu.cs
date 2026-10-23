@@ -38,7 +38,7 @@ public class CheckoutMenu
                         Customer customer = customerController.RegisterCustomer();
 
                         Order? order = orderController.CreateOrder(customer, restaurant, items);
-                        
+                        Console.WriteLine($"Order skapad! ID: {order.orderId}");
                         if (order == null)
                         {
                             Console.WriteLine("Ordern kunde inte skapas. Försök igen.");
