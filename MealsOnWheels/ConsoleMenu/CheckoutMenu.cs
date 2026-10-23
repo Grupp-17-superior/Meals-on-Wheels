@@ -23,7 +23,7 @@ public class CheckoutMenu
     {
         while (true)
         {
-            Console.Clear();
+            
             Console.WriteLine("1. Fortsätt till kassan");
             Console.WriteLine("2. Rabatter");
             Console.WriteLine("3. Tillbaka till restaurangen");
@@ -40,6 +40,8 @@ public class CheckoutMenu
 
                         Order? order = orderController.CreateOrder(customer, restaurant, items);
                         
+                        Console.WriteLine($"Ditt order-ID är: {order.orderId}"); //Skriver nu ut Order-ID efter att ordern har skapats
+
                         if (order == null)
                         {
                             Console.WriteLine("Ordern kunde inte skapas. Försök igen.");
@@ -55,7 +57,7 @@ public class CheckoutMenu
                         Console.WriteLine($" Att betala: {total}kr");
 
                         // välj betalningsmetod
-                        Console.Clear();
+                        
                         Console.WriteLine("Välj betalningsmetod:");
                         Console.WriteLine("1. Kort");
                         Console.WriteLine("2. Swosh");
