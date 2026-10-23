@@ -27,10 +27,24 @@ public class Order //det som behövs för state i order /sofia
         orderId = nextId++;
 
         CustomerNotificationObserver notification =
-    new CustomerNotificationObserver(customer);
+        new CustomerNotificationObserver(customer);
 
         AddObserver(notification);
         AddObserver(restaurant);
+    }
+
+    public async Task ProcessOrderAsync()
+    {
+        while (currentState is not DeliveredState &&
+               currentState is not CancelledState)
+        {
+            await Task.Delay(10000);
+
+            if (currentState is CancelledState)
+                break;
+
+            NextState();
+        }
     }
 
     public void SetState(IOrderState newState) //ändra state
