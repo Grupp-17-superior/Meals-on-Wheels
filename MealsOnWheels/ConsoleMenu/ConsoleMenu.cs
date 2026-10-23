@@ -6,18 +6,18 @@ namespace MealsOnWheels;
 
 public class ConsoleMenu
 {
-    RestaurantService _restaurantService;
-    CheckoutMenu _checkoutMenu;
+    private RestaurantService _restaurantService;
+    private CheckoutMenu _checkoutMenu;
+    private OrderController _orderController; // 1. Deklarera fältet
 
-    private OrderController _orderController;
-
-    public ConsoleMenu(RestaurantService restaurants, CheckoutMenu checkoutMenu)
+    // 2. Lägg till OrderController i konstruktorn
+    public ConsoleMenu(RestaurantService restaurants, CheckoutMenu checkoutMenu, OrderController orderController)
     {
         _restaurantService = restaurants;
         _checkoutMenu = checkoutMenu;
-        _orderController = new OrderController(new DeliveryService());
+        _orderController = orderController;
     }
-      
+
     public void StartMenu()
     {
         while (true)
