@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 namespace MealsOnWheels;
 
@@ -38,21 +39,7 @@ public class ConsoleMenu
                     }
                 case '2':
                     {
-                        Console.Write("Ange order-ID du vill söka efter: ");
-                        if (int.TryParse(Console.ReadLine(), out int searchId))
-                        {
-                            var order = _orderController.GetOrderById(searchId);
-
-                            if (order != null)
-                            {
-                                Console.WriteLine($"Order hittad! Order-ID: {order.orderId}");
-                                
-                            }
-                            else
-                            {
-                                Console.WriteLine($"Ingen order hittades med ID {searchId}.");
-                            }
-                        }
+                        SearchOrderById();
                         break;
                     }
 
@@ -136,6 +123,26 @@ public class ConsoleMenu
                 if (completed)
                     return true;
             }
+        }
+    }
+        public void SearchOrderById()
+         { 
+
+        Console.Write("Ange order-ID du vill söka efter: ");
+        if (int.TryParse(Console.ReadLine(), out int searchId))
+        {
+            var order = _orderController.GetOrderById(searchId);
+
+            if (order != null)
+            {
+                Console.WriteLine($"Order hittad! Order-ID: {order.orderId}");
+
+            }
+            else
+            {
+                Console.WriteLine($"Ingen order hittades med ID {searchId}.");
+            }
+        
         }
     }
 }
