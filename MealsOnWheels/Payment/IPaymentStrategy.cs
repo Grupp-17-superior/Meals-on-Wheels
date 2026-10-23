@@ -2,10 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace MealsOnWheels.Payment
+namespace MealsOnWheels;
+
+public interface IPaymentStrategy
 {
-    public interface IPaymentStrategy
-    {
-        bool Pay(decimal amount);
-    }
+    bool Pay(decimal amount);
 }

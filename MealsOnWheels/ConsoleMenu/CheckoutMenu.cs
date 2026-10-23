@@ -1,9 +1,6 @@
-﻿using MealsOnWheels.Customers;
-using MealsOnWheels.Payment;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
-
 namespace MealsOnWheels;
 
 public class CheckoutMenu
