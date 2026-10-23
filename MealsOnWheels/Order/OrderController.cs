@@ -68,6 +68,9 @@ public void ProcessPayment(Order order, IDiscountStrategy? strategy)
         Thread.Sleep(2000);
         order.NextState();
     }
-
-
+    //tar OrderID för kund sökning/staturs uppdatering
+    public Order? GetOrderById(int orderId)
+    {
+        return _orders.FirstOrDefault(o => o.orderId == orderId);
+    }
 }

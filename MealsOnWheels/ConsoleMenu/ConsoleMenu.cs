@@ -8,10 +8,13 @@ public class ConsoleMenu
     RestaurantService _restaurantService;
     CheckoutMenu _checkoutMenu;
 
+    private OrderController _orderController;
+
     public ConsoleMenu(RestaurantService restaurants, CheckoutMenu checkoutMenu)
     {
         _restaurantService = restaurants;
         _checkoutMenu = checkoutMenu;
+        _orderController = new OrderController(new DeliveryService());
     }
 
     public void StartMenu()
@@ -34,7 +37,22 @@ public class ConsoleMenu
                         break;
                     }
                 case '2':
-                    { 
+                    {
+                        Console.Write("Ange order-ID du vill söka efter: ");
+                        if (int.TryParse(Console.ReadLine(), out int searchId))
+                        {
+                            var order = _orderController.GetOrderById(searchId);
+
+                            if (order != null)
+                            {
+                                Console.WriteLine($"Order hittad! Order-ID: {order.orderId}");
+                                
+                            }
+                            else
+                            {
+                                Console.WriteLine($"Ingen order hittades med ID {searchId}.");
+                            }
+                        }
                         break;
                     }
 
