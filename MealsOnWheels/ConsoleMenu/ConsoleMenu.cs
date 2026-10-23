@@ -17,7 +17,7 @@ public class ConsoleMenu
         _checkoutMenu = checkoutMenu;
         _orderController = new OrderController(new DeliveryService());
     }
-     
+      
     public void StartMenu()
     {
         while (true)
