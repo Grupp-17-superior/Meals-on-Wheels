@@ -42,6 +42,8 @@ public class CheckoutMenu
                         if (order == null)
                         {
                             Console.WriteLine("Ordern kunde inte skapas. Försök igen.");
+                            Thread.Sleep(2000);
+                            Console.Clear();
                             break;
                         }
 
@@ -72,6 +74,8 @@ public class CheckoutMenu
 
                             default:
                                 Console.WriteLine("Ogiltigt val av betalningsmetod.");
+                                Thread.Sleep(2000);
+                                Console.Clear();
                                 return false;
                         }
 
@@ -85,6 +89,8 @@ public class CheckoutMenu
                         }
 
                         Console.WriteLine("Betalning misslyckades. Försök igen.");
+                        Thread.Sleep(2000);
+                        Console.Clear();
                         break;
                     }
 
@@ -101,6 +107,8 @@ public class CheckoutMenu
 
                 default:
                     Console.WriteLine("Ogiltigt val. Försök igen.");
+                    Thread.Sleep(2000);
+                    Console.Clear();
                     break;
             }
         }
