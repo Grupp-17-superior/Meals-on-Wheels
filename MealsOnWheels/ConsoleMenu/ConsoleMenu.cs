@@ -22,6 +22,7 @@ public class ConsoleMenu
     {
         while (true)
         {
+            Console.Clear();
             Console.WriteLine("Välkommen!");
             Console.WriteLine("Välj ett alternativ");
             Console.WriteLine("1. Visa restauranger");
@@ -69,6 +70,7 @@ public class ConsoleMenu
 
             if (index >= 0 && index < restaurants.Count)
             {
+                Console.Clear();
                 bool completed = ShowMenu(restaurants[index]);
                 if (completed)
                     break;
@@ -103,12 +105,16 @@ public class ConsoleMenu
             {
                 var selectedItem = restaurant.Menu[index];
                 int selectedAmount;
+                Console.Clear();
                 Console.WriteLine("Hur många vill du ha?");
                 if (int.TryParse(Console.ReadLine(), out selectedAmount) && selectedAmount > 0)
                 {
+                    Console.Clear();
                     OrderItems orderItems = new OrderItems(selectedItem, selectedAmount);
                     Cartitems.Add(orderItems);
                     Console.WriteLine($"{selectedAmount}st {selectedItem.Name}");
+                    Thread.Sleep(2000);
+                    Console.Clear();
                 }
 
                 else
@@ -118,6 +124,13 @@ public class ConsoleMenu
                     Console.Clear();
                 }
             }
+            else if (choice == '0')
+            {
+                Console.Clear();
+                bool completed = _checkoutMenu.Menu(restaurant, Cartitems);
+                if (completed)
+                    return true;
+            }
 
             else
             {
@@ -126,12 +139,7 @@ public class ConsoleMenu
                 Console.Clear();
             }
 
-            if (choice == '0')
-            {
-                bool completed = _checkoutMenu.Menu(restaurant, Cartitems);
-                if (completed)
-                    return true;
-            }
+            
         }
     }
         public void SearchOrderById()
