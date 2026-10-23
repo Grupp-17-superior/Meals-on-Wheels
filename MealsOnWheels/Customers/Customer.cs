@@ -10,6 +10,7 @@ public class Customer
     private string _deliveryAddress { get; set; }
     private string _phoneNumber { get; set; }
     private string _email { get; set; }
+    public object Name { get; internal set; }
 
     public Customer(int customerId, string name, string deliveryAddress, string phoneNumber, string email)
     {

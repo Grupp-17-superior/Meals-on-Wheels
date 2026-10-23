@@ -7,6 +7,7 @@ public class MenuItem
 {
     public string Name { get; set; }
     public decimal Price { get; set; }
+    public object PhoneNumber { get; internal set; }
 
     public MenuItem(string name, decimal price)
     {

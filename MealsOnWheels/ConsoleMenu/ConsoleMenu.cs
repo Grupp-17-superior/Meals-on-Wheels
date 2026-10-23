@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.ExceptionServices;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 namespace MealsOnWheels;
@@ -23,11 +24,11 @@ public class ConsoleMenu
         while (true)
         {
             Console.Clear();
-            Console.WriteLine("Välkommen!");
+            Console.WriteLine("Välkommen till Meals on Wheels!");
             Console.WriteLine("Välj ett alternativ");
             Console.WriteLine("1. Visa restauranger");
             Console.WriteLine("2. Kolla status");
-            Console.WriteLine("3. En annan sak");
+            Console.WriteLine("3. Avsluta");
 
             char choice = Console.ReadKey(true).KeyChar;
 
@@ -49,6 +50,7 @@ public class ConsoleMenu
                 case '3':
                     { 
                         Console.Clear();
+                        Environment.Exit(0);
                         break;
                     }
             }
@@ -89,34 +91,65 @@ public class ConsoleMenu
         List<OrderItems> Cartitems = new List<OrderItems>();
         while (true)
         {
-            //Fixa så att användaren får välja hur många av varorna de vill ha, samt använda deras val i new OrderItems()
-            Console.WriteLine("Välj en vara");
+            Console.WriteLine($"--- {restaurant.Name} Meny ---\n");
+
+            Console.WriteLine($"Telefon: {restaurant.PhoneNumber} | Adress: {restaurant.Address}");
+            Console.WriteLine($"Minsta orderbelopp: {restaurant.MinimumOrderAmount} kr | Leveranstid: {restaurant.EstimatedDeliveryTime} min\n");
+
             for (int i = 0; i < restaurant.Menu.Count; i++)
             {
-                Console.WriteLine($"{i + 1} {restaurant.Menu[i].Name}");
+                Console.WriteLine($"{i + 1}. {restaurant.Menu[i].Name} ({restaurant.Menu[i].Price} kr)");
             }
             Console.WriteLine("0. Gå till checkout");
+            Console.WriteLine("B. Gå tillbaka till restaurangval"); // Nytt menyval
 
             char choice = Console.ReadKey(true).KeyChar;
             int index = choice - '1';
 
-
             if (index >= 0 && index < restaurant.Menu.Count)
             {
                 var selectedItem = restaurant.Menu[index];
-                int selectedAmount;
                 Console.Clear();
-                Console.WriteLine("Hur många vill du ha?");
-                if (int.TryParse(Console.ReadLine(), out selectedAmount) && selectedAmount > 0)
+                Console.WriteLine($"Vald vara: {selectedItem.Name}");
+                Console.Write("Hur många vill du ha? ");
+
+                if (int.TryParse(Console.ReadLine(), out int selectedAmount) && selectedAmount > 0)
                 {
                     Console.Clear();
                     OrderItems orderItems = new OrderItems(selectedItem, selectedAmount);
                     Cartitems.Add(orderItems);
-                    Console.WriteLine($"{selectedAmount}st {selectedItem.Name}");
-                    Thread.Sleep(2000);
-                    Console.Clear();
-                }
 
+                    Console.WriteLine($"Lade till {selectedAmount}st {selectedItem.Name} i varukorgen.\n");
+
+                    // Undermeny efter genomfört val
+                    bool waitingForChoice = true;
+                    while (waitingForChoice)
+                    {
+                        Console.WriteLine("Vad vill du göra nu?");
+                        Console.WriteLine("1. Fortsätta handla (återgå till menyn)");
+                        Console.WriteLine("2. Gå till checkout");
+
+                        char subChoice = Console.ReadKey(true).KeyChar;
+                        if (subChoice == '1')
+                        {
+                            waitingForChoice = false;
+                            Console.Clear();
+                        }
+                        else if (subChoice == '2')
+                        {
+                            Console.Clear();
+                            bool completed = _checkoutMenu.Menu(restaurant, Cartitems);
+                            if (completed)
+                                return true;
+
+                            waitingForChoice = false; // Om checkout avbryts/misslyckas återgår vi till loopen
+                        }
+                        else
+                        {
+                            Console.WriteLine("Ogiltigt val, försök igen.\n");
+                        }
+                    }
+                }
                 else
                 {
                     Console.WriteLine("Ogiltigt antal");
@@ -131,18 +164,20 @@ public class ConsoleMenu
                 if (completed)
                     return true;
             }
-
+            else if (char.ToUpper(choice) == 'B') // Hanterar både 'b' och 'B'
+            {
+                Console.Clear();
+                return false; // Returnerar false för att gå tillbaka till restaurangvalet
+            }
             else
             {
-                Console.WriteLine("Oglitigt val");
+                Console.WriteLine("Ogiltigt val");
                 Thread.Sleep(2000);
                 Console.Clear();
             }
-
-            
         }
     }
-        public void SearchOrderById()
+    public void SearchOrderById()
          { 
 
         Console.Write("Ange order-ID du vill söka efter: ");
@@ -154,6 +189,13 @@ public class ConsoleMenu
             {
                 Console.Clear();
                 Console.WriteLine($"Order hittad! Order-ID: {order.orderId}");
+                Console.WriteLine($"Restaurang: {order.restaurant.Name}");
+                Console.WriteLine($"Kund: {order.customer.Name}");
+                //Console.WriteLine($"Adress: {order.customer.address}");
+                //Console.WriteLine($"selected items selected amount: {order.orderItems.Count}");
+                Console.WriteLine($"Status: {order.GetState()}");
+                Console.WriteLine($"Totalpris: {order.CalculateFinalPrice()} kr");
+                
                 Thread.Sleep(2000);
 
             }
