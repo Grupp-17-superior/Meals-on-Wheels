@@ -1,16 +1,16 @@
 ﻿namespace MealsOnWheels;
 
-public class Restaurant : IOrderObserver
+public class Restaurant(int restaurantId, string name, string address, string phoneNumber, decimal minimumOrderAmount, int estimatedDeliveryTime) : IOrderObserver
 {
-	public int RestaurantId { get; set; }
-	public string Name { get; set; }
-	public string Address { get; set; }
-	public string PhoneNumber { get; set; }
+    public int RestaurantId { get; set; } = restaurantId;
+    public string Name { get; set; } = name;
+    public string Address { get; set; } = address;
+    public string PhoneNumber { get; set; } = phoneNumber;
 
-	public string status { get; private set; }
+    public string status { get; private set; }
     //restaurangens egna regler 
-    public decimal MinimumOrderAmount { get; set; }
-    public int EstimatedDeliveryTime { get; set; }
+    public decimal MinimumOrderAmount { get; set; } = minimumOrderAmount;
+    public int EstimatedDeliveryTime { get; set; } = estimatedDeliveryTime;
 
     // Restaurangens meny (lista på rätter/produkter)
     public List<MenuItem> Menu { get; set; } = new List<MenuItem>();
@@ -19,17 +19,7 @@ public class Restaurant : IOrderObserver
     //Behöver restaurangen hålla koll på alla aktiva ordrar? Eller ska det skötas av OrderService?
     public List<Order> ActiveOrders { get; set; } = new List<Order>();
 
-	public Restaurant(int restaurantId, string name, string address, string phoneNumber, decimal minimumOrderAmount, int estimatedDeliveryTime)
-	{
-        RestaurantId = restaurantId;
-		Name = name;
-		Address = address;
-		PhoneNumber = phoneNumber;
-        MinimumOrderAmount = minimumOrderAmount;
-        EstimatedDeliveryTime = estimatedDeliveryTime;
-	}
-
-	// kontroll för minsta order som just nu kontrolleras före rabatt
+    // kontroll för minsta order som just nu kontrolleras före rabatt
     public bool MeetsMinimumOrder(decimal orderTotal)
     {
         return orderTotal >= MinimumOrderAmount;
