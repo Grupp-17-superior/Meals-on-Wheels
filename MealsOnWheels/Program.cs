@@ -1,8 +1,5 @@
-﻿using MealsOnWheels.Customers;
-using MealsOnWheels.Payment;
-using System;
+﻿using System;
 using System.Collections.Generic;
-
 namespace MealsOnWheels;
 
 class Program

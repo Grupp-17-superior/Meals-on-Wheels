@@ -7,7 +7,8 @@ public class Restaurant : IOrderObserver
 	public string Address { get; set; }
 	public string PhoneNumber { get; set; }
 
-	//restaurangens egna regler 
+	public string status { get; private set; }
+    //restaurangens egna regler 
     public decimal MinimumOrderAmount { get; set; }
     public int EstimatedDeliveryTime { get; set; }
 
@@ -50,9 +51,6 @@ public class Restaurant : IOrderObserver
 	// Anropas när statusen på en order ändras (NotifyObservers())
 	public void Update(Order order)
 	{
-		Console.WriteLine($"[Restaurang {Name}] Notis: Order #{order.orderId} har nu status: {order.GetState()}");
-
-		// Exempel på logik baserat på orderns status:
-		// Om ordern är mottagen kan restaurangen t.ex. börja tillaga maten
-	}
+		status = order.GetState();
+    }
 }
