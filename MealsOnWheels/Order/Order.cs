@@ -38,7 +38,7 @@ public class Order //det som behövs för state i order /sofia
         while (currentState is not DeliveredState &&
                currentState is not CancelledState)
         {
-            await Task.Delay(TimeSpan.FromMinutes(3));
+            await Task.Delay(TimeSpan.FromMinutes(1));
 
             if (currentState is CancelledState)
                 break;
@@ -47,6 +47,13 @@ public class Order //det som behövs för state i order /sofia
         }
     }
 
+    public void GetItems()
+    {
+        foreach (var item in orderItems)
+        {
+            Console.WriteLine($"Item: {item.MenuItem.Name}, {item.Quantity}");
+        }
+    }
     public void SetState(IOrderState newState) //ändra state
     {
         currentState = newState;
