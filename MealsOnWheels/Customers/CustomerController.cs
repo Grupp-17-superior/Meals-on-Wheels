@@ -17,23 +17,26 @@ namespace MealsOnWheels;
         }
         public Customer RegisterCustomer()
         {
+            Console.Clear();
             Console.WriteLine("Ange ditt namn:");
             string name = Console.ReadLine() ?? "";
 
+            Console.Clear();
             Console.WriteLine("Ange din leveransadress:");
             string address = Console.ReadLine() ?? "";
-
+        
+            Console.Clear();
             Console.WriteLine("Ange ditt telefonnummer:");
             string phone = Console.ReadLine() ?? "";
-
+            
+            Console.Clear();    
             Console.WriteLine("Ange din e-postadress:");
             string email = Console.ReadLine() ?? "";
 
             Customer customer = customerService.CreateCustomer(name, address, phone, email);
-
-            Console.WriteLine(
-                $"Kund skapad! Ditt kund-ID är {customer.GetCustomerId()}");
-
+            
+            Console.Clear();
+            Console.WriteLine($"Kund skapad! Ditt kund-ID är {customer.GetCustomerId()}");
             return customer;
         }
     }

@@ -36,6 +36,8 @@ public class StrategyMenu
 
                 default:
                     Console.WriteLine("Ogiltigt val");
+                    Thread.Sleep(2000);
+                    Console.Clear();
                     break;
             }
         }
