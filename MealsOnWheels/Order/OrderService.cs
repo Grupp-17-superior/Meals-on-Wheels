@@ -5,11 +5,11 @@ using System.Text;
 namespace MealsOnWheels;
 
 
-public class OrderController
+public class OrderService
 {
     private DeliveryService _deliveryService;
     private List<Order> _orders = new List<Order>();
-    public OrderController(DeliveryService deliveryService)
+    public OrderService(DeliveryService deliveryService)
     {
         _deliveryService = deliveryService;
     }
@@ -53,32 +53,16 @@ public void ProcessPayment(Order order, IDiscountStrategy? strategy)
         string test = Console.ReadLine();
     }
 
-
-    // simulera order när payment blivit godkänd
-    public void SimulateOrder(Order order)
-    {
-        order.NotifyObservers();
-
-        Thread.Sleep(2000);
-        order.NextState();
-
-        Thread.Sleep(3000); //levererar
-        order.NextState();
-        DeliveryDriver? driver = _deliveryService.AssignDriver(order);
-        if (driver == null)
-        {
-            Console.WriteLine("Det finns inget ledigt bud nu. Vänligen vänta tills en bud blir ledig.");
-            return;
-        }
-        Thread.Sleep(2000);
-        order.NextState();//levererad
-        driver.CompleteDelivery(_deliveryService); //budet blir ledig igen och sätts sist i kön.
-    }
     //tar OrderID för kund sökning/staturs uppdatering
     public Order? GetOrderById(int orderId)
     {
-        return _orders.FirstOrDefault(o => o.orderId == orderId);
-
-    
+        foreach (var order in _orders)
+        {
+            if (order.orderId == orderId)
+            {
+                return order;
+            }
+        }
+        return null;
     }
 }

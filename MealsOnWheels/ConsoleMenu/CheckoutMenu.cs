@@ -7,13 +7,13 @@ public class CheckoutMenu
 {
     StrategyMenu strategyMenu = new StrategyMenu();
     CustomerController customerController;
-    OrderController orderController;
+    OrderService orderService;
     PaymentService paymentService = new PaymentService();
     IDiscountStrategy strategy = new NoDiscount();
 
-    public CheckoutMenu(OrderController orderController, CustomerController customerController, PaymentService paymentService)
+    public CheckoutMenu(OrderService orderService, CustomerController customerController, PaymentService paymentService)
     {
-        this.orderController = orderController;
+        this.orderService = orderService;
         this.customerController = customerController;
         this.paymentService = paymentService;
     }
@@ -37,7 +37,7 @@ public class CheckoutMenu
                     {
                         Customer customer = customerController.RegisterCustomer();
 
-                        Order? order = orderController.CreateOrder(customer, restaurant, items);
+                        Order? order = orderService.CreateOrder(customer, restaurant, items);
                         
                         if (order == null)
                         {

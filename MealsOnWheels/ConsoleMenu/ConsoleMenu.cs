@@ -8,14 +8,14 @@ public class ConsoleMenu
 {
     private RestaurantService _restaurantService;
     private CheckoutMenu _checkoutMenu;
-    private OrderController _orderController; // 1. Deklarera fältet
+    private OrderService _orderService; // 1. Deklarera fältet
 
-    // 2. Lägg till OrderController i konstruktorn
-    public ConsoleMenu(RestaurantService restaurants, CheckoutMenu checkoutMenu, OrderController orderController)
+    // 2. Lägg till OrderService i konstruktorn
+    public ConsoleMenu(RestaurantService restaurants, CheckoutMenu checkoutMenu, OrderService orderService)
     {
         _restaurantService = restaurants;
         _checkoutMenu = checkoutMenu;
-        _orderController = orderController;
+        _orderService = orderService;
     }
      
     public void StartMenu()
@@ -131,7 +131,7 @@ public class ConsoleMenu
         Console.Write("Ange order-ID du vill söka efter: ");
         if (int.TryParse(Console.ReadLine(), out int searchId))
         {
-            var order = _orderController.GetOrderById(searchId);
+            var order = _orderService.GetOrderById(searchId);
 
             if (order != null)
             {
