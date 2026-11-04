@@ -49,6 +49,7 @@ public class Order //det som behövs för state i order /sofia
             NextState();
         }
     }
+     
 
     public void GetItems()
     {

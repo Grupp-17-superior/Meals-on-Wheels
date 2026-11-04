@@ -40,7 +40,7 @@ public class CheckoutMenu
 
                         Order? order = orderService.CreateOrder(customer, restaurant, items);
                         
-                        Console.WriteLine($"Ditt order-ID är: {order.orderId}"); //Skriver nu ut Order-ID efter att ordern har skapats
+                    
 
                         if (order == null)
                         {
@@ -54,11 +54,11 @@ public class CheckoutMenu
                         order.SetDiscountStrategy(strategy);
                         decimal total = order.CalculateFinalPrice();
 
-                        Console.WriteLine($" Att betala: {total}kr");
+                        Console.WriteLine($"\nAtt betala: {total}kr");
 
                         // välj betalningsmetod
                         
-                        Console.WriteLine("Välj betalningsmetod:");
+                        Console.WriteLine("\nVälj betalningsmetod:");
                         Console.WriteLine("1. Kort");
                         Console.WriteLine("2. Swosh");
 
@@ -89,6 +89,9 @@ public class CheckoutMenu
                         {
                             Console.Clear();
                             Console.WriteLine("Betalning lyckades! Tack för din beställning.");
+
+                            Console.WriteLine($"Ditt order-ID är: {order.orderId}"); //Skriver nu ut Order-ID efter att ordern har skapats
+
                             _ = order.ProcessOrderAsync();
                             Thread.Sleep(4000);
                             return true;

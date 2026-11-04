@@ -6,21 +6,21 @@ public class Customer
 {
     
     private int _customerId { get; } // tog bort set så att customer id inte kan ändras utifrån så vi slipper problem med att koppla order till customer.
-    private string _name { get; set; }
-    private string _deliveryAddress { get; set; }
-    private string _phoneNumber { get; set; }
-    private string _email { get; set; }
-    public object Name { get; internal set; }
+    private string Name { get; set; }
+    private string DeliveryAddress { get; set; }
+    private string PhoneNumber { get; set; }
+    private string Email { get; set; }
+    
 
     public Customer(int customerId, string name, string deliveryAddress, string phoneNumber, string email)
     {
         _customerId = customerId;
-        _name = name;
-        _deliveryAddress = deliveryAddress;
-        _phoneNumber = phoneNumber;
-        _email = email;
+        Name = name;
+        DeliveryAddress = deliveryAddress;
+        PhoneNumber = phoneNumber;
+        Email = email;
     }
 
-    public string GetName() => _name;// detta gör så att jag kan koppla kundens namn fast att den är privat i klassen. (getter(fat arrow function)))
+    public string GetName() => Name;// detta gör så att jag kan koppla kundens namn fast att den är privat i klassen. (getter(fat arrow function)))
     public int GetCustomerId() => _customerId;
 }
