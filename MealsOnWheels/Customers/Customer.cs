@@ -6,7 +6,7 @@ public class Customer
 {
     
     private int _customerId { get; } // tog bort set så att customer id inte kan ändras utifrån så vi slipper problem med att koppla order till customer.
-    private string Name { get; set; }
+    public string Name { get; private set; }
     private string DeliveryAddress { get; set; }
     private string PhoneNumber { get; set; }
     private string Email { get; set; }

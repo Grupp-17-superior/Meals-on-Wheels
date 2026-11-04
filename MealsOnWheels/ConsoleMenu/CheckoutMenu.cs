@@ -56,31 +56,35 @@ public class CheckoutMenu
 
                         Console.WriteLine($"\nAtt betala: {total}kr");
 
-                        // välj betalningsmetod
-                        
-                        Console.WriteLine("\nVälj betalningsmetod:");
-                        Console.WriteLine("1. Kort");
-                        Console.WriteLine("2. Swosh");
-
-                        string paymentChoice = Console.ReadLine() ?? "";
 
                         IPaymentStrategy paymentStrategy;
-
-                        switch (paymentChoice)
+                        while (true)
                         {
-                            case "1":
-                                paymentStrategy = new CardPayment();
-                                break;
 
-                            case "2":
-                                paymentStrategy = new SwoshPayment();
-                                break;
+                            // välj betalningsmetod
+                            Console.WriteLine("\nVälj betalningsmetod:");
+                            Console.WriteLine("1. Kort");
+                            Console.WriteLine("2. Swosh");
 
-                            default:
-                                Console.WriteLine("Ogiltigt val av betalningsmetod.");
-                                Thread.Sleep(2000);
-                                Console.Clear();
-                                return false;
+                            string paymentChoice = Console.ReadLine() ?? "";
+
+                            switch (paymentChoice)
+                            {
+                                case "1":
+                                    paymentStrategy = new CardPayment();
+                                    break;
+
+                                case "2":
+                                    paymentStrategy = new SwoshPayment();
+                                    break;
+
+                                default:
+                                    Console.WriteLine("Ogiltigt val av betalningsmetod.");
+                                    Thread.Sleep(2000);
+                                    Console.Clear();
+                                    continue;
+                            }
+                            break;
                         }
 
                         bool paymentSuccess = paymentService.ProcessPayment(paymentStrategy, total);
