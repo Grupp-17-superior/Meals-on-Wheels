@@ -193,6 +193,7 @@ public class ConsoleMenu
                 Console.WriteLine($"Kund: {order.customer.Name}");
                 //Console.WriteLine($"Adress: {order.customer.address}");
                 //Console.WriteLine($"selected items selected amount: {order.orderItems.Count}");
+                Console.WriteLine($"Levereras av: {order.deliveryDriver?.Name}");
                 Console.WriteLine($"Status: {order.GetState()}");
                 Console.WriteLine($"Totalpris: {order.CalculateFinalPrice()} kr");
 

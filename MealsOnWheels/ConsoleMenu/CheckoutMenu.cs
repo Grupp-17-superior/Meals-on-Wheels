@@ -9,13 +9,15 @@ public class CheckoutMenu
     CustomerController customerController;
     OrderService orderService;
     PaymentService paymentService = new PaymentService();
+    DeliveryService deliveryService = new DeliveryService();
     IDiscountStrategy strategy = new NoDiscount();
 
-    public CheckoutMenu(OrderService orderService, CustomerController customerController, PaymentService paymentService)
+    public CheckoutMenu(OrderService orderService, CustomerController customerController, PaymentService paymentService, DeliveryService deliveryService)
     {
         this.orderService = orderService;
         this.customerController = customerController;
         this.paymentService = paymentService;
+        this.deliveryService = deliveryService;
     }
 
 
@@ -95,6 +97,8 @@ public class CheckoutMenu
                             Console.WriteLine("Betalning lyckades! Tack för din beställning.");
 
                             Console.WriteLine($"Ditt order-ID är: {order.orderId}"); //Skriver nu ut Order-ID efter att ordern har skapats
+
+                            DeliveryDriver? driver = deliveryService.AssignDriver(order);
 
                             _ = order.ProcessOrderAsync();
                             Thread.Sleep(4000);

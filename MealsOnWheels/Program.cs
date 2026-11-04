@@ -14,10 +14,11 @@ class Program
         OrderService orderService = new OrderService(deliveryService);
         CustomerController customerController = new CustomerController(customerService);
 
+        DeliveryDriverTestData.AddTestDrivers(deliveryService);
         restaurantService.CreateRestaurant();
 
         // Samma orderService skickas till både CheckoutMenu och ConsoleMenu!
-        CheckoutMenu checkoutMenu = new CheckoutMenu(orderService, customerController, paymentService);
+        CheckoutMenu checkoutMenu = new CheckoutMenu(orderService, customerController, paymentService, deliveryService);
         ConsoleMenu consoleMenu = new ConsoleMenu(restaurantService, checkoutMenu, orderService);
 
         consoleMenu.StartMenu();
