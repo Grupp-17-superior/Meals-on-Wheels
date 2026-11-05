@@ -8,12 +8,12 @@ public static class DeliveryDriverTestData
     public static void AddTestDrivers(DeliveryService deliveryService)// skapar testbud och lägger dem i kön
     {
         deliveryService.AddAvailableDriver(
-            new DeliveryDriver(1, "Anna", "0701234567", "Cykel"));
+            new DeliveryDriver(1, "Carlito", "0701234567", "Cykel"));
 
         deliveryService.AddAvailableDriver(
-            new DeliveryDriver(2, "Erik", "0702345678", "Bil"));
+            new DeliveryDriver(2, "Lorenzo Svensson", "0702345678", "Bil"));
 
         deliveryService.AddAvailableDriver(
-            new DeliveryDriver(3, "Sara", "0703456789", "Moped"));
+            new DeliveryDriver(3, "Ciciliana", "0703456789", "Moped"));
     }
 }

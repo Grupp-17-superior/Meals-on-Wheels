@@ -41,7 +41,7 @@ public class Order //det som behövs för state i order /sofia
         while (currentState is not DeliveredState &&
                currentState is not CancelledState)
         {
-            await Task.Delay(TimeSpan.FromMinutes(1));
+            await Task.Delay(TimeSpan.FromMinutes(2));
 
             if (currentState is CancelledState)
                 break;

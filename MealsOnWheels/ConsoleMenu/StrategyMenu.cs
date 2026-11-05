@@ -13,7 +13,7 @@ public class StrategyMenu
             Console.WriteLine("1. Ingen");
             Console.WriteLine("2. Fast Rabatt");
             Console.WriteLine("3. Rabatt %");
-            Console.WriteLine("4. Student Rabatt");
+            Console.WriteLine("4. Student Rabatt 10%");
             Console.Write("Välj (1-4): ");
 
             string choice = Console.ReadLine();
@@ -24,11 +24,11 @@ public class StrategyMenu
                     return new NoDiscount();
 
                 case "2":
-                    decimal fixedAmount = PromptForDecimal("Fast Rabatt");
+                    decimal fixedAmount = PromptForDecimal("Fast Rabatt ");
                     return new FixedDiscountStrategy(fixedAmount);
 
                 case "3":
-                    decimal percentage = PromptForDecimal("Rabatt %");
+                    decimal percentage = PromptForDecimal("Rabatt % ");
                     return new PercentageDiscount(percentage);
 
                 case "4":
